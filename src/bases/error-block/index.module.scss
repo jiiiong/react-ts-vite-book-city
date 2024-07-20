@@ -1,0 +1,30 @@
+.block {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transform: translateY(-10%);
+    
+}
+.image {
+    width: 100%;
+    height: 200px;
+    & svg{
+        height: 100%;
+    }
+}
+
+.description {
+    color: var(--ygm-color-weak);
+}
+
+.title{
+    font-size: var(--ygm-font-size-m);
+}
+
+.sub-title{
+    margin-top: var(--ygm-padding-xs);
+    font-size: var(--ygm-font-size-s);
+}

@@ -1,0 +1,19 @@
+.swiper-indicator {
+  display: flex;
+  width: auto;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  margin-right: 5px;
+  background-color: var(--ygm-color-weak);
+}
+
+.active {
+  width: 12px;
+  border-radius: 2.5px;
+  background-color: var(--ygm-color-primary);
+}
+
