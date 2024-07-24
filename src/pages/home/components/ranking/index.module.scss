@@ -1,0 +1,41 @@
+@import '../../../../assets/styles/mixin.scss';
+
+// card-title
+.header {
+  background: linear-gradient(180deg, #ffdfd9 0%, rgba(255, 246, 232, 0) 61.54%);
+}
+
+// body-grid
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:  16px 0;
+}
+
+// books
+.book-title {
+  line-height: 16px;
+  margin-bottom: 4px;
+  font-size: var(--ygm-font-size-m);
+  color: #333;
+  @include wrap(1);
+}
+
+.book-author {
+  font-size: var(--ygm-font-size-s);
+  color: #969ba3;
+}
+
+// tab-list
+.tabList {
+  border-radius: 15px;
+}
+
+.tabActive {
+  border-radius: 15px;
+}
+
+.tabContent {
+  padding: 0;
+  padding-top: 16px;
+}

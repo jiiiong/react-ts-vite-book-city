@@ -6,3 +6,18 @@ export type {ErrorBlockProps} from "./error-block"
 
 export {default as Swiper} from './swiper';
 export type {SwiperProps, SwiperItemProps} from './swiper'
+
+export {default as Space} from './space';
+export type {SpaceProp} from './space';
+
+export {default as Card} from './card';
+export type {CardProps} from './card';
+
+export {default as CountDown} from './count-down';
+export type {CownDownProps} from './count-down';
+
+export {default as Tabs} from './tabs';
+export type {TabsProps, TabProps} from './tabs';
+
+export {default as Image} from './image';
+export type {ImageProps} from './image';

@@ -1,0 +1,49 @@
+@import '../../../../assets/styles/mixin.scss';
+
+.header {
+  background: linear-gradient(180deg, #ffdfd9 0%, rgba(255, 246, 232, 0) 61.54%);
+  display: flex;
+  align-items: center;
+
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.book-title {
+  margin-top: 5px;
+  font-size: var(--ygm-font-size-m);
+  @include wrap(2);
+}
+
+
+.book-author {
+  font-size: var(--ygm-font-size-s);
+  color: #969ba3;
+  @include wrap(1);
+}
+
+.divider {
+  color: #e6ebf2;
+}
+
+.count-down-num {
+  font-size: var(--ygm-font-size-m);
+  color: #fff;
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background: linear-gradient(to right, #000, #3b3f47);
+}
+
+.count-down-symbol {
+  color: #3b3f47;
+  margin: 0 2px;
+}

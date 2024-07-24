@@ -8,12 +8,12 @@ export interface SpinnerLoadingProps {
     style?: React.CSSProperties,
 }
 
-const SpinnerLoading: React.FC<SpinnerLoadingProps> = 
+const SpinnerLoading: React.FC<SpinnerLoadingProps> =
 ({color='defualt', size = 32, style}) => {
   return (
     <div
       className={cx(
-        styles['spinner-loading'], 
+        styles['spinner-loading'],
         styles[`color-${color}`],
       )}
       style={{...style, width: size, height: size }}

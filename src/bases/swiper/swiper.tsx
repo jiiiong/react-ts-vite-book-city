@@ -43,6 +43,7 @@ function Swiper({
   const startXRef = useRef<number>(0);
   const trackRef = useRef<HTMLDivElement>(null);
   const autoPlayRef = useRef<boolean>(false);
+
   const childCount = Children.count(children);
 
 

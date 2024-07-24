@@ -1,0 +1,39 @@
+@import '@/assets/styles/mixin.scss';
+
+.header {
+  background: linear-gradient(to bottom, #c5f4f3 0%, rgba(255,246,232,0) 61.54%);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+
+.book-cover {
+  width: 30%;
+  // overflow: hidden;
+}
+
+.book-title {
+  font-size: var(--ygm-font-size-l);
+}
+
+.book-desc {
+  font-size: var(--ygm-font-size-m);
+  color: #969ba3;
+  @include wrap(2);
+  line-height: 18px;
+  // margin-bottom: 7px;
+}
+
+.book-meta {
+  color: #969ba3;
+  font-size: var(--ygm-font-size-s);
+}
+
+
+
+
+

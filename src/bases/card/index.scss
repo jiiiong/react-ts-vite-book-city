@@ -1,0 +1,36 @@
+@import '../../assets/styles/mixin.scss';
+$class-prefix: 'jiiiong-card';
+
+.#{$class-prefix} {
+  width: 100%;
+  border-radius: var(--ygm-padding-m);
+  overflow: hidden;
+
+  &-header {
+      height: auto;
+      padding: var(--ygm-padding-s) var(--ygm-padding-m);
+
+      position: relative;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      &-title {
+        font-size: var(--ygm-font-size-xl);
+        @include no-wrap()
+      }
+      &-extra {
+        font-size: var(--ygm-font-size-m);
+        @include no-wrap()
+      }
+  }
+
+  &-body {
+    // 构造一个 body 容器
+    width: 100%;
+    position: relative;
+    padding: 0 var(--ygm-padding-m) var(--ygm-padding-s) var(--ygm-padding-m);
+    min-height: 50px;
+  }
+
+}

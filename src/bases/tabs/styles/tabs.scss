@@ -1,0 +1,62 @@
+$css-prefix: 'jiiiong-tabs';
+
+.#{$css-prefix} {
+  &-tab-list {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    overflow-x: scroll;
+    scrollbar-width: none;
+
+    &-card {
+      background-color: var(--ygm-color-border);
+
+      .#{$css-prefix}-tab-title {
+        color: var(--ygm-color-weak);
+      }
+
+      .#{$css-prefix}-tab-active {
+        background: var(--ygm-color-primary);
+
+        .#{$css-prefix}-tab-title {
+          color: var(--ygm-color-white);
+        }
+      }
+    }
+  }
+
+  &-tab {
+    flex: auto;
+    padding: 0 12px;
+    &-title {
+      width: min-content;
+      white-space: nowrap;
+      margin: auto;
+      font-size: var(--ygm-font-size-m);
+      padding: 8px 0 10px;
+    }
+
+    &-active {
+      color: var(--ygm-color-primary);
+    }
+  }
+
+  &-tab-line {
+    // width: 35px;
+    height: 2px;
+    border-radius: 2px;
+    background-color: var(--ygm-color-primary);
+
+    position: absolute;
+    bottom: 0
+  }
+
+
+  &-content {
+    padding: var(--ygm-padding-m);
+  }
+
+
+}

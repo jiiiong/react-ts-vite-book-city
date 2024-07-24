@@ -1,0 +1,14 @@
+$class-prefix: 'jiiiong-grid';
+
+.#{$class-prefix} {
+  --item-span: 8px;
+  --gap: 0;
+  --gap-vertical: var(--gap);
+  --gap-horizontal: var(--gap);
+
+  display: grid;
+  column-gap: var(--gap-horizontal);
+  row-gap: var(--gap-vertical);
+  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+  align-items: stretch;
+}

@@ -1,0 +1,86 @@
+$css-prefix: 'jiiiong-space';
+
+.#{$css-prefix}{
+  // width: 100%;
+  --gap: 8px;
+  --gap-vertical: var(--gap);
+  --gap-horizontal: var(--gap);
+
+  // block flex ?
+  display: inline-flex;
+  &-block {
+    display: flex;
+  }
+
+  // row
+  &-horizontal {
+    flex-direction: row;
+
+    > .#{$css-prefix}-item {
+      margin-right: var(--gap-horizontal);
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    &.#{$css-prefix}-wrap {
+      flex-wrap: wrap;
+      // 因为无法选中最后一行，使用负数的 margin 来恢复最后一行的 padding；
+      margin-bottom: calc( var(--gap-vertical)* -1);
+      > .#{$css-prefix}-item {
+        padding-bottom: var(--gap-vertical);
+      }
+    }
+
+  }
+
+  // column
+  &-vertical {
+    flex-direction: column;
+    > .#{$css-prefix}-item {
+      margin-bottom: var(--gap-vertical);
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &-align {
+    &-start {
+      align-items: flex-start;
+    }
+    &-end {
+      align-items: flex-end;
+    }
+    &-center {
+      align-items: center;
+    }
+    &-baseline {
+      align-items: baseline;
+    }
+  }
+
+  &-justify {
+    &-start {
+      justify-content: start;
+    }
+    &-end {
+      justify-content: end;
+    }
+    &-center {
+      justify-content: center;
+    }
+    &-between {
+      justify-content: space-between;
+    }
+    &-around {
+      justify-content: space-around;
+    }
+    &-evenly {
+      justify-content: space-evenly;
+    }
+    &-stretch {
+      justify-content: stretch;
+    }
+  }
+}
