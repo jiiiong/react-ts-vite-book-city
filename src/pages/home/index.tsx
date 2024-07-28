@@ -16,14 +16,13 @@ const Home: React.FC = () => {
   const { data, isLoading, error } = useRequest<IHomeData>({
     url: api.getHomeData,
   });
-  console.log(data, isLoading, error);
+
   if (error) {
     return <ErrorBlock />;
   }
   if (isLoading) {
     return <Loading />;
   }
-
   return (
     <>
 

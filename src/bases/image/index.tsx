@@ -38,10 +38,10 @@ function Image({
     <img
       src={observerEntry?.isIntersecting || !lazy ? src : loading}
       alt={alt}
-      width={width}
-      height={height}
+      // width={width}
+      // height={height}
       className={className}
-      style={{ ...style, objectFit: fit }}
+      style={{ ...style, width: width, height: height,  objectFit: fit }}
       onClick={onClick}
       onError={onError}
       onLoad={onLoad}

@@ -2,6 +2,8 @@
   --width: 69px;
   --height: 95px;
   --radius: 5px;
+  width: var(--width);
+  height: var(--height);
   font-size: var(--ygm-font-size-m);
 
   img {

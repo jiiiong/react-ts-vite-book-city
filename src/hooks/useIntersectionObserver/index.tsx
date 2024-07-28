@@ -27,7 +27,6 @@ function useItersectionObserver(
     const observerParams = {threshold, root, rootMargin};
     const ob = new IntersectionObserver(([entry]:IntersectionObserverEntry[])=>{
       setEntry(entry);
-      console.log(entry);
     }, observerParams)
 
     // 监视元素
