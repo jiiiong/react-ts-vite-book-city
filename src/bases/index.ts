@@ -19,5 +19,8 @@ export type {CownDownProps} from './count-down';
 export {default as Tabs} from './tabs';
 export type {TabsProps, TabProps} from './tabs';
 
+export {default as Sidebar} from './side-bar';
+export type {SidebarItemProps, SidebarProps} from './side-bar';
+
 export {default as Image} from './image';
 export type {ImageProps} from './image';

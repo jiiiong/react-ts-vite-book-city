@@ -7,27 +7,27 @@ import recommend from '@/assets/images/recommend.png';
 
 function NavBar(){
   return (
-    <div className={styles['nav-bar']}>
-      <div className={styles['nav-bar-item']}>
-        <Link to={'/category'} className={styles.icon}>
-          <img src={catagory} alt="catagory" />
-        </Link>
-        <h3>目录</h3>
-      </div>
-      <div className={styles['nav-bar-item']}>
-        <Link to={'/ranking'} className={styles.icon}>
+    <div className={styles["nav-bar"]}>
+      <div className={styles["nav-bar-item"]}>
+        <Link to={"/ranking"} className={styles.icon}>
           <img src={rank} alt="rank" />
         </Link>
         <h3>排行</h3>
       </div>
-      <div className={styles['nav-bar-item']}>
-        <Link to={'/book-list/finish'} className={styles.icon}>
+      <div className={styles["nav-bar-item"]}>
+        <Link to={"/category"} className={styles.icon}>
+          <img src={catagory} alt="catagory" />
+        </Link>
+        <h3>目录</h3>
+      </div>
+      <div className={styles["nav-bar-item"]}>
+        <Link to={"/book-list/finish"} className={styles.icon}>
           <img src={finish} alt="finish" />
         </Link>
         <h3>完本</h3>
       </div>
-      <div className={styles['nav-bar-item']}>
-        <Link to={'/book-list/recommend'} className={styles.icon}>
+      <div className={styles["nav-bar-item"]}>
+        <Link to={"/book-list/recommend"} className={styles.icon}>
           <img src={recommend} alt="recommend" />
         </Link>
         <h3>推荐</h3>

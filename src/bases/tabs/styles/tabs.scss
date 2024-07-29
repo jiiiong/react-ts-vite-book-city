@@ -45,12 +45,12 @@ $css-prefix: 'jiiiong-tabs';
 
   &-tab-line {
     // width: 35px;
-    height: 2px;
+    height: 1.5px;
     border-radius: 2px;
     background-color: var(--ygm-color-primary);
 
     position: absolute;
-    bottom: 0
+    bottom: 4px
   }
 
 

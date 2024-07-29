@@ -46,7 +46,6 @@ export default function Tabs({
     const length = panels.push(child as ReactElement<TabProps, typeof Tab>);
     keyToIndex[child.key] = length - 1;
   })
-
   const updateLineStyle = useCallback(()=>{
     if (!showTabLine || !tabListRef.current || !tabLineRef.current) return;
     const activeIndex = keyToIndex[active];
@@ -66,8 +65,7 @@ export default function Tabs({
       return () => {
         isMountRef.current = false;
       };
-    }, []
-  )
+    }, [])
 
   useEffect(()=>{
     window.addEventListener('resize', updateLineStyle);
@@ -107,6 +105,7 @@ export default function Tabs({
               [tabActiveClassName!]: tabActiveClassName && item.key === active,
             })}
             onClick={() => {
+
               setActive(item.key!);
               onChange?.(item.key!);
             }}
@@ -116,9 +115,11 @@ export default function Tabs({
         ))}
       </div>
 
-      <div className={cx(CSSPrefix + "-content", tabContentClassName)}>
-        {panels[keyToIndex[active]]}
-      </div>
+      {(panels[keyToIndex[active]].props.children) &&
+        <div className={cx(CSSPrefix + "-content", tabContentClassName)}>
+          {panels[keyToIndex[active]]}
+        </div>
+      }
     </div>
   );
 }

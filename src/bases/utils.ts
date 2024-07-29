@@ -16,6 +16,7 @@ export function traverReactNode(
       }
     });
   }
+
   let i = 0;
   helper(children);
 }

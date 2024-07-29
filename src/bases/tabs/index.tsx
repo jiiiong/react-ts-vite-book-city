@@ -4,8 +4,8 @@ import Tab from './tab';
 export type {TabsProps} from './tabs';
 export type {TabProps} from './tab';
 
-type InternalTabs = typeof InternalTabs;
-interface TabsInterface extends InternalTabs {
+type InternalTabsType = typeof InternalTabs;
+interface TabsInterface extends InternalTabsType {
   Tab: typeof Tab;
 }
 
