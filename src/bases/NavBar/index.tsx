@@ -19,7 +19,7 @@ function NavBar({
     /* box */
     <div
       className="
-        bg-ygm-background px-ygm-l
+        bg-ygm-background px-ygm-l h-[45px]
         flex items-center justify-between gap-x-ygm-s
         text-ygm-xl whitespace-nowrap"
       style={{...style}}
