@@ -70,6 +70,35 @@ function Swiper({
     return () => clearInterval(intervalID);
   }, [autoPlay, dragging, autoPlayInterval, calcIndex]);
 
+  function handleMouseUp(e: MouseEvent) {
+    const diff = startXRef.current - e.clientX;
+    let ratioedDiff = 0;
+    if (trackRef.current) {
+      ratioedDiff = diff / trackRef.current.offsetWidth;
+    }
+    setCurrentIndex(Math.round(calcIndex(currentIndex + ratioedDiff)) % childCount);
+    trackRef.current!.removeEventListener("mousemove", handleMouseMove as EventListener);
+    trackRef.current!.removeEventListener("mouseup", handleMouseUp as EventListener);
+    setDragging(false);
+  }
+
+  function handleMouseMove(e: MouseEvent) {
+    const diff = startXRef.current - e.clientX;
+    let ratioedDiff = 0;
+    if (trackRef.current) {
+      ratioedDiff = diff / trackRef.current.offsetWidth;
+    }
+    setCurrentIndex(calcIndex(currentIndex + ratioedDiff));
+  }
+
+  function handleMouseDown(e: React.MouseEvent<HTMLDivElement>) {
+    startXRef.current = e.clientX;
+    autoPlayRef.current = false;
+    trackRef.current!.addEventListener("mousemove", handleMouseMove);
+    trackRef.current!.addEventListener("mouseup", handleMouseUp);
+    setDragging(true);
+  }
+
   function handleTouchEnd(e: TouchEvent) {
     const diff = startXRef.current - e.changedTouches[0].clientX;
     let ratioedDiff = 0;
@@ -139,6 +168,7 @@ function Swiper({
         className={styles.track}
         ref={trackRef}
         onTouchStart={handleTouchStart}
+        onMouseDown={handleMouseDown}
       >
         {Children.map(children, (child, index) => {
           const position = getFinalPosition(index);
