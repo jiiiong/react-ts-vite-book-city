@@ -33,7 +33,7 @@ function Image({
   onLoad,
 }: ImageProps) {
   const imgRef = useRef<HTMLImageElement | null>(null);
-  const observerEntry = useItersectionObserver(imgRef, {freezeOnceVisible: true});
+  const {entry:observerEntry} = useItersectionObserver(imgRef, {freezeOnceVisible: true});
   return (
     <img
       src={observerEntry?.isIntersecting || !lazy ? src : loading}

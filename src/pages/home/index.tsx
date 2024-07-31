@@ -13,6 +13,7 @@ import LimitedRead from "./components/limited-read";
 import Ranking from "./components/ranking";
 
 const Home: React.FC = () => {
+
   const { data, isLoading, error } = useRequest<IHomeData>({
     url: api.getHomeData,
   });

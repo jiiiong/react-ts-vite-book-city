@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 
 
@@ -12,11 +12,8 @@ function useItersectionObserver(
 ) {
 
   const [entry, setEntry] = useState<IntersectionObserverEntry>();
+  const entryRef = useRef<IntersectionObserverEntry>()
   const fronzon = freezeOnceVisible && entry?.isIntersecting;
-
-
-
-
 
   useEffect(()=>{
     // 元素尚不存在
@@ -27,6 +24,7 @@ function useItersectionObserver(
     const observerParams = {threshold, root, rootMargin};
     const ob = new IntersectionObserver(([entry]:IntersectionObserverEntry[])=>{
       setEntry(entry);
+      entryRef.current = entry
     }, observerParams)
 
     // 监视元素
@@ -35,7 +33,7 @@ function useItersectionObserver(
 
   }, [fronzon, root, rootMargin, targetRef, threshold]);
 
-  return entry;
+  return {entry, entryRef};
 }
 
 export default useItersectionObserver;

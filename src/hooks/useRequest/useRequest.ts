@@ -20,11 +20,11 @@ function useRequest<Data=unknown, Error=unknown> (
     config?: SWRConfiguration
 ): useRequestResponse<Data, Error> {
     // 定义 fetcher
-    const fetcher = () => axiosInstance.request<Data>(request);
+    // const fetcher = () => axiosInstance.request<Data>(request);
 
     const swrResponse = useSWR<AxiosResponse<Data>, AxiosError<Error>>(
-      request.url,
-      fetcher,
+      request,
+      axiosInstance.request<Data>,
       config,
     );
 

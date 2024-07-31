@@ -27,7 +27,7 @@ export default function Ranking() {
               <BookCover
                 src={book.coverImg}
                 alt={book.title}
-                style={{ "--width": px2rem(47), '--heigh':px2rem(66)}}
+                style={{ "--width": px2rem(47), '--height':px2rem(66)}}
               />
               <div>
                 <div className={styles["book-title"]}>{book.title}</div>
@@ -45,7 +45,7 @@ export default function Ranking() {
       title='排行榜'
       extra="更多"
       headerClassName={styles.header}
-      onClick={()=>navigate('/book-list/ranking')}
+      onClick={()=>navigate('/ranking')}
     >
       {isLoading ?
         <Loading /> :

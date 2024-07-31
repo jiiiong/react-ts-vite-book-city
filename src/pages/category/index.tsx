@@ -15,7 +15,6 @@ function Category() {
     return <ErrorBlock />
   if (isLoading)
     return <Loading />
-  console.log(data)
 
   return (
     /** viewport */
