@@ -13,7 +13,7 @@ export function Ellipsis({
   collapse='',
 }:EllipsisProps) {
   const [mode, setMode] = useState<'normal'|'expanded'|'colapsed'>('normal');
-  const ellipsisedText = useRef('');
+  const [ellipsisedText, setEllipsisedText] = useState('');
   const containerRef = useRef<HTMLDivElement>(null);
   const tailingEllipsis = ' ... ';
 
@@ -22,9 +22,10 @@ export function Ellipsis({
     const oriStyles = window.getComputedStyle(containerRef.current!)
     const lineHeight = parseFloat(oriStyles.lineHeight)
     const actualHeight = parseFloat(oriStyles.height)
-    const expectedHeight = col * lineHeight;
+    const actual_row = Math.round(actualHeight/lineHeight)
 
-    if (actualHeight > expectedHeight) {
+    console.log(actual_row, col);
+    if (actual_row > col) {
       // 克隆
       const container = document.createElement('div');
       for (const [key, value] of Object.entries(oriStyles)) {
@@ -46,7 +47,7 @@ export function Ellipsis({
         container.innerText = candidateText;
 
         const candidateHeight = container.getBoundingClientRect().height;
-        if (candidateHeight > expectedHeight)
+        if (Math.round(candidateHeight/lineHeight) > col)
           r = mid - 1;
         else{
           maxIndex = mid
@@ -54,7 +55,7 @@ export function Ellipsis({
         }
       }
       setMode('colapsed');
-      ellipsisedText.current = oriText.slice(0, maxIndex);
+      setEllipsisedText(oriText.slice(0, maxIndex));
       container.remove()
     }
   }, [col, expand]);
@@ -75,7 +76,7 @@ export function Ellipsis({
       case 'colapsed': {
         return (
           <>
-            {ellipsisedText.current}
+            {ellipsisedText}
             {tailingEllipsis}
             {expand !== "" && <a className="underline text-blue-500" onClick={()=>{setMode('expanded')}}>{expand}</a>}
           </>
