@@ -24,3 +24,6 @@ export type {SidebarItemProps, SidebarProps} from './side-bar';
 
 export {default as Image} from './image';
 export type {ImageProps} from './image';
+
+export {Ellipsis} from './ellipsis';
+export type {EllipsisProps} from './ellipsis'
