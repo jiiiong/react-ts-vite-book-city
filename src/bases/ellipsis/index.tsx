@@ -1,4 +1,5 @@
-import {  useLayoutEffect, useRef, useState } from "react";
+import { useResizeObserver } from "@/hooks/useResizeObserver";
+import {   useCallback, useLayoutEffect, useRef, useState } from "react";
 
 export interface EllipsisProps {
   text: string;
@@ -13,37 +14,45 @@ export function Ellipsis({
   collapse='',
 }:EllipsisProps) {
   const [mode, setMode] = useState<'normal'|'expanded'|'colapsed'>('normal');
+  // const []
   const [ellipsisedText, setEllipsisedText] = useState('');
   const containerRef = useRef<HTMLDivElement>(null);
   const tailingEllipsis = ' ... ';
 
-  // 创建一个镜像 container，调整其内部的 text，直到符合行数；
-  useLayoutEffect(()=>{
+  // 同步 container resize；
+  useResizeObserver(()=>{
+      calcEllipsised()
+  }, containerRef);
+
+  // 计算 text 在 dom 中是否溢出
+  // 并设置状态
+  const calcEllipsised = useCallback(() => {
+
+    // 创建一个内容为完整 text 的 container；
+    // 样式与实际的 container 保持一致
+    const container = document.createElement('div');
     const oriStyles = window.getComputedStyle(containerRef.current!)
+    for (const [key, value] of Object.entries(oriStyles)) {
+      container.style.setProperty(key, value)
+    }
+    container.style.height = 'auto';
+    container.style.position = 'fixed';
+    container.style.visibility = 'hidden';
+    container.innerHTML = text
+    document.body.appendChild(container)
+
     const lineHeight = parseFloat(oriStyles.lineHeight)
-    const actualHeight = parseFloat(oriStyles.height)
+    const actualHeight = container.getBoundingClientRect().height
     const actual_row = Math.round(actualHeight/lineHeight)
 
-    console.log(actual_row, col);
     if (actual_row > col) {
-      // 克隆
-      const container = document.createElement('div');
-      for (const [key, value] of Object.entries(oriStyles)) {
-        container.style.setProperty(key, value)
-      }
-      container.style.height = 'auto';
-      container.style.position = 'fixed';
-      container.style.visibility = 'hidden';
-      const oriText = containerRef.current!.innerText;
-      document.body.appendChild(container)
-
       // 用二分法找符合标准的字数
       let l = 0;
-      let r = oriText.length-1;
+      let r = text.length-1;
       let maxIndex = -1
       while (l < r) {
         const mid = Math.floor((l + r)/2);
-        const candidateText = oriText.slice(0, mid+1) + tailingEllipsis + expand;
+        const candidateText = text.slice(0, mid+1) + tailingEllipsis + expand;
         container.innerText = candidateText;
 
         const candidateHeight = container.getBoundingClientRect().height;
@@ -54,11 +63,19 @@ export function Ellipsis({
           l = mid + 1
         }
       }
-      setMode('colapsed');
-      setEllipsisedText(oriText.slice(0, maxIndex));
-      container.remove()
+      setEllipsisedText(text.slice(0, maxIndex));
+      if (mode === "normal")
+        setMode('colapsed');
+    } else {
+      setMode('normal');
     }
-  }, [col, expand]);
+    container.remove()
+  },[col, expand, text])
+
+  // 刚 mount 时触发
+  useLayoutEffect(()=>{
+    calcEllipsised()
+  }, [calcEllipsised]);
 
   function renderText() {
     switch (mode){

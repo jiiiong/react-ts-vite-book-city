@@ -16,7 +16,7 @@ export function DetailInfo() {
         <BookCover
           src={data!.coverImg}
           alt={data!.title}
-          style={{ "--width": "84px", "--height": "112px" }}
+          style={{ "--width": px2rem(84), "--height": px2rem(112) }}
         ></BookCover>
         <Space direction="vertical" justify="center" gap={px2rem(10)}>
           <div className="text-ygm-l font-bold leading-[30px]">
