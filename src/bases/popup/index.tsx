@@ -7,6 +7,7 @@ export interface PopupProps {
   visible: boolean;
   mask?: boolean;
   children: ReactNode;
+  zIndex?: number;
   afterShow?: ()=>void;
   afterClose?: ()=>void;
   onMaskClick?: ()=>void;
@@ -17,6 +18,7 @@ export function Popup({
   visible,
   mask=true,
   children,
+  zIndex=50,
   afterShow,
   afterClose,
   onMaskClick,
@@ -38,7 +40,7 @@ export function Popup({
     }
   })
   return (
-    <div>
+    <div className={`z-${zIndex}`}>
       {mask && <Mask visible={visible} onMaskClick={onMaskClick}></Mask>}
       <animated.div
         className={cx("fixed",
