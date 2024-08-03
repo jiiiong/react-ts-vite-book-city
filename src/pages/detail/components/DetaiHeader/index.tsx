@@ -10,6 +10,8 @@ export function DetaiHeader() {
         p-ygm-l pt-[45px] relative">
       <DetailNavbar />
       <DetailInfo />
+      {/**divider */}
+      <div className="h-[1px] bg-ygm-border mb-ygm-l"></div>
       <DetailCatelog />
     </div>
   );

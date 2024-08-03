@@ -7,6 +7,7 @@ import Category from '@/pages/category';
 import Ranking from '@/pages/ranking';
 import BookList from '@/pages/book-list';
 import Detail from '@/pages/detail';
+import { Chapter } from '@/pages/chapters';
 
 const AppRouter = createBrowserRouter([
   {
@@ -37,10 +38,10 @@ const AppRouter = createBrowserRouter([
     path: '/book/:id',
     element: <Detail />,
   },
-//   {
-//     path: '/book/:bookId/:chapterId',
-//     element: <Chapter />,
-//   },
+  {
+    path: '/book/:bookId/:chapterId',
+    element: <Chapter />,
+  },
   {
     path: '*',
     element: <Navigate to="/" />,

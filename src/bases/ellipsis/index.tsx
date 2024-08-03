@@ -27,7 +27,6 @@ export function Ellipsis({
   // 计算 text 在 dom 中是否溢出
   // 并设置状态
   const calcEllipsised = useCallback(() => {
-
     // 创建一个内容为完整 text 的 container；
     // 样式与实际的 container 保持一致
     const container = document.createElement('div');
@@ -66,11 +65,12 @@ export function Ellipsis({
       setEllipsisedText(text.slice(0, maxIndex));
       if (mode === "normal")
         setMode('colapsed');
+
     } else {
       setMode('normal');
     }
     container.remove()
-  },[col, expand, text])
+  },[col, expand, mode, text])
 
   // 刚 mount 时触发
   useLayoutEffect(()=>{
