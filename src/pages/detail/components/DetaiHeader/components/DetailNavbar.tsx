@@ -34,7 +34,7 @@ export function DetailNavbar() {
       ref={navRef}
     >
       <NavBar
-        onBack={()=>navigate(-1)}
+        onBack={()=>{navigate(-1);}}
         style={{background: fix ? `#fff` : `inherit`}}>
         <div className="text-center">{fix ? data?.title : ''}</div>
       </NavBar>

@@ -1,4 +1,5 @@
 import { Space } from "@/bases";
+import { Popup } from "@/bases/popup";
 import { BookCatelogList } from "@/components/book-catelogList";
 import { useRequest } from "@/hooks/useRequest";
 import { api } from "@/pages/detail/api";
@@ -39,15 +40,16 @@ export function DetailCatelog() {
           <i className="icon-menu text-ygm-weak text-ygm-xxxl mb-ygm-xs"></i>
           <div className="">目录</div>
         </div>
-        <div className={`${popup ? "visible" : "invisible"}`}>popup</div>
+        <Popup visible={popup} onMaskClick={()=>setPopup(false)}>
+          <BookCatelogList
+            catelogList={data!.chapters as string[]}
+            imgUrl={data!.coverImg}
+            title={data!.title}
+            author={data!.author}
+            bookId={data!.bookId}
+          />
+        </Popup>
       </div>
-      <BookCatelogList
-        catelogList={data!.chapters as string[]}
-        imgUrl={data!.coverImg}
-        title={data!.title}
-        author={data!.author}
-        bookId={data!.bookId}
-      />
     </>
   );
 }

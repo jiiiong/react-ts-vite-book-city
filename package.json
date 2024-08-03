@@ -11,6 +11,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@react-spring/web": "^9.7.4",
     "axios": "^1.7.2",
     "classnames": "^2.5.1",
     "query-string": "^9.1.0",

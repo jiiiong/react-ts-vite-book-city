@@ -36,6 +36,7 @@ function Sidebar({
         {/* item */}
         {tabs.map((item) => (
           <div
+            key={item.key}
             className={`
               w-full cursor-pointer p-ygm-s
               text-center text-nowrap overflow-hidden overflow-ellipsis
