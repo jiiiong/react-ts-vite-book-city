@@ -58,9 +58,9 @@ function Sidebar({
           overflow-y-auto
         "
       >
-        {tabs.map((item)=>(
+        {tabs.map((item, index)=>(
           item.key === activeKey &&
-          <>{item}</>
+          <div key={index}>{item}</div>
         ))}
       </div>
     </div>

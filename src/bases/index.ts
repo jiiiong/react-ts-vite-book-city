@@ -27,3 +27,6 @@ export type {ImageProps} from './image';
 
 export {Ellipsis} from './ellipsis';
 export type {EllipsisProps} from './ellipsis'
+
+export {Toast} from './toast';
+export type {ToastProps, ToastShowProps} from './toast'

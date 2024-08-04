@@ -36,6 +36,7 @@ function InnerBookSearchBar({
       <div className="flex-grow rounded-ygm-m bg-ygm-box flex overflow-hidden">
         <i className="block icon-search text-ygm-weak p-ygm-s"></i>
         <input
+          name="seach input"
           className="w-full bg-inherit focus:outline-none"
           type="text"
           placeholder="搜索作者、作者"
