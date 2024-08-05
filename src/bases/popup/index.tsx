@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import cx from "classnames";
 import { Mask } from "../mask";
 export interface PopupProps {
-  position?: 'left';
+  position?: 'left' | 'bottom';
   visible: boolean;
   mask?: boolean;
   children: ReactNode;
@@ -40,17 +40,23 @@ export function Popup({
     }
   })
   return (
-    <div className={`z-${zIndex}`}>
+    <div className={`relative z-${zIndex}`}>
       {mask && <Mask visible={visible} onMaskClick={onMaskClick}></Mask>}
       <animated.div
         className={cx("fixed",
           {
           "h-screen top-[0] left-[0]": position === "left",
+          "w-screen bottom-[0] left-[0]": position === "bottom",
         })}
         style={{
           transform: percent.to((v) => {
             // left
-            return `translate(-${v}%,0)`;
+            if (position === 'left')
+              return `translate(-${v}%,0)`;
+            // bottom
+            else (position === 'bottom')
+              return `translateY(${v}%)`;
+
           }),
         }}
       >

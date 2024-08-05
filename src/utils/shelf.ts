@@ -6,7 +6,17 @@ export function isShelfed(bookId?: string): boolean {
     return false
   const shelf = storage.get('shelf') as IBookInfo[] || []
   const index = shelf.findIndex((book)=>(book.bookId === bookId));
-  return index !== -1
+  if (index !== -1)
+    return true
+  const group = storage.get('shelf-group') as Record<string, IBookInfo[]> || {};
+  for (const books of Object.values(group)) {
+    const index = books.findIndex((book)=>(book.bookId === bookId));
+    if (index !== -1)
+      return true
+  }
+
+  return false
+
 }
 
 export function setShelf(bookInfo: IBookInfo) {
