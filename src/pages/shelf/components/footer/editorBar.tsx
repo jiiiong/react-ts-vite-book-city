@@ -1,3 +1,4 @@
+import { Dialog } from "@/bases/dialog/dialog";
 import { Popup } from "@/bases/popup";
 import { useReadLocalStorage } from "@/hooks/useReadLocalStorage";
 import { IBookInfo } from "@/types/book";
@@ -20,6 +21,7 @@ export function EditorBar({
 }:EditorBarProps) {
   const selecedCount = selectedBook.length + selectGroup.length;
   const [groupPopup, setGroupPopup] = useState(false);
+  const [dialog, setDialog] = useState(false);
   const groupList = useReadLocalStorage<Record<string, IBookInfo[]>[]>('shelf-group') || [];
 
   function showGroupPopup() {
@@ -45,7 +47,8 @@ export function EditorBar({
           >
             分组至
           </div>
-          <div className={`py-ygm-m ${!selecedCount && "text-ygm-weak"}`}
+          <div
+            className={`py-ygm-m ${!selecedCount && "text-ygm-weak"}`}
             onClick={onDelete}
           >
             删除 ({selecedCount})
@@ -65,23 +68,26 @@ export function EditorBar({
           text-ygm-l leading-none
           "
         >
-          <div className="mb-ygm-xl text-center font-semibold">
-            书籍分组
-          </div>
-          <div className="ml-ygm-xl mb-ygm-xl text-ygm-primary line-clamp-1"
-            onClick={()=>{
-              onGroup('新建分组');
+          <div className="mb-ygm-xl text-center font-semibold">书籍分组</div>
+          <div
+            className="ml-ygm-xl mb-ygm-xl text-ygm-primary line-clamp-1"
+            onClick={() => {
               setGroupPopup(false);
+              setDialog(true)
+              // onGroup("新建分组");
+
             }}
           >
             <i className="icon-plus text-ygm-s"></i>
             <span className="ml-ygm-s">新建分组</span>
           </div>
-          <div >
+          <div>
             {Object.keys(groupList).map((groupName) => (
-              <div key={groupName} className="ml-ygm-xl mb-ygm-xl line-clamp-1"
-                onClick={()=>{
-                  onGroup(groupName)
+              <div
+                key={groupName}
+                className="ml-ygm-xl mb-ygm-xl line-clamp-1"
+                onClick={() => {
+                  onGroup(groupName);
                   setGroupPopup(false);
                 }}
               >
@@ -92,6 +98,26 @@ export function EditorBar({
           </div>
         </div>
       </Popup>
+      <Dialog
+        visible={dialog}
+        onMaskClick={() => setDialog(false)}
+        title="新建分组"
+        content={
+          <input
+            type="text"
+            className="dd
+              border-solid border-ygm-weak border-[1px]
+              rounded-ygm-m
+              px-ygm-s
+            "
+          />
+        }
+        buttons={[
+          { key: "cancel", text: "取消" },
+          { key: "confirm", text: "确认", type: 'primary' },
+        ]}
+      />
+
     </>
   );
 }
