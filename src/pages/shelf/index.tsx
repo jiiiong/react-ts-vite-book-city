@@ -6,15 +6,13 @@ import { ShelfList } from './components/list';
 import { ShelfGroupList } from './components/list/GroupList';
 import { useReadLocalStorage } from '@/hooks/useReadLocalStorage';
 import { EditorBar } from './components/footer/editorBar';
-import { removeShelf } from '@/utils/shelf';
-import { removeGroup, setGroup } from '@/utils/shelf-group';
+import { removeBooks, removeGroup, setGroup } from '@/utils/shelf';
 
 function Shelf () {
     const [isEditing, setIsEditing] = useState(false);
     const [selectedBook, setSelectedBook] = useState<IBookInfo[]>([])
     const [selectedGroup, setSelectedGroup] = useState<string[]>([])
     const bookList = useReadLocalStorage<IBookInfo[]>('shelf') || [];
-    const groups = useReadLocalStorage<Record<string, IBookInfo[]>>('shelf-group') || {};
 
     function updateSelectedBook(book: IBookInfo) {
       const arr = selectedBook.filter((item)=>(item.bookId !== book.bookId))
@@ -40,7 +38,7 @@ function Shelf () {
       setSelectedGroup([]);
     }
 
-    function toggleEditing() {
+    function onToggleEditing() {
       if (isEditing) {
         setSelectedBook([]);
         setSelectedGroup([]);
@@ -58,10 +56,10 @@ function Shelf () {
         <div className="flex-initial">
           <ShelfHeader
             isEditing={isEditing}
-            onEditClick={toggleEditing}
+            onEditClick={onToggleEditing}
           />
         </div>
-        {/** content */}
+        {/** shelf content */}
         <div
           className="
           px-ygm-xl py-ygm-s
@@ -89,24 +87,14 @@ function Shelf () {
           selectedBook={selectedBook}
           selectGroup={selectedGroup}
           onDelete={()=>{
-            selectedBook.forEach((book)=>{
-              removeShelf(book.bookId)
-            });
+            removeBooks(selectedBook)
             clearSelectedBook();
-
-            selectedGroup.forEach((groupName)=>{
-              removeGroup(groupName)
-            });
+            removeGroup(selectedGroup)
             clearSelectedGroup();
           }}
+
           onGroup={(groupName)=>{
-            let bookList = selectedBook
-            if (selectedGroup.length){
-              selectedGroup.map((groupName)=>{
-                bookList = bookList.concat(groups[groupName])
-              })
-            }
-            setGroup(groupName, bookList);
+            setGroup(groupName, selectedBook, selectedGroup)
             clearSelectedBook();
             clearSelectedGroup();
           }}

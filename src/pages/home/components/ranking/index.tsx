@@ -19,7 +19,7 @@ export default function Ranking() {
         {rank.books.map((book) => (
           <div
             key={book.bookId}
-            onClick={() => navigate(`/book-list/${book.bookId}`)}
+            onClick={() => navigate(`/book/${book.bookId}`)}
           >
             <Space
               gap={px2rem(6)}

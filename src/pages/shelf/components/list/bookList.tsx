@@ -3,7 +3,8 @@ import BookCover from "@/components/book-cover";
 import { IBookInfo } from "@/types/book";
 import { px2rem } from "@/utils/unit";
 import { useNavigate } from "react-router-dom";
-
+// 之所以使用 BookList props，而不是直接访问 localStorage
+// 是为了这个组件能被 groupList 使用，用来显示 group 内部的书籍
 interface ShelfBookListProps {
   BookList: IBookInfo[];
   isEditing?: boolean;

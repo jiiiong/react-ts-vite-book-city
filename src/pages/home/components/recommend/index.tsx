@@ -21,7 +21,7 @@ export default function Recommond() {
         {data!.recommend.map((book) => (
           <div
             key={book.bookId}
-            onClick={()=>navigate(`/book-list/${book.bookId}`)}
+            onClick={()=>navigate(`/book/${book.bookId}`)}
           >
             <BookCover src={book.coverImg} alt={book.title} />
             <Space

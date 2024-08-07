@@ -10,6 +10,8 @@ interface DialogProps {
   buttons?: DialogButtonProps[];
   closeOnACtion?: boolean;
   onMaskClick?: () => void;
+  onClose?: () => void;
+  onButton?: (buttonProp: DialogButtonProps, index: number) => void | Promise<void>;
 }
 
 export function Dialog({
@@ -18,6 +20,9 @@ export function Dialog({
   content,
   buttons,
   onMaskClick,
+  closeOnACtion = true,
+  onClose,
+  onButton,
 }:DialogProps) {
 
   const springStyle = useSpring({
@@ -71,7 +76,7 @@ export function Dialog({
               self-stretch border-solid border-y-ygm-box border-y-[1.5px] text-ygm-m
               flex justify-between"
               >
-                {buttons.map(({ key, ...buttonProp }) => (
+                {buttons.map(({ key, ...buttonProp }, index) => (
                   <div
                     className={`flex-1 border-solid border-r-ygm-box border-r-[1.5px] last:border-r-0`}
                   >
@@ -79,7 +84,12 @@ export function Dialog({
                       key={key}
                       {...buttonProp}
                       onClick={async () => {
-                        await Promise.all([buttonProp.onClick?.(key)]);
+                        await Promise.all([
+                          buttonProp.onClick?.(key),
+                          onButton?.({ key, ...buttonProp }, index),
+                        ]);
+                        if (closeOnACtion)
+                          onClose?.()
                       }}
                     ></DialogButton>
                   </div>
