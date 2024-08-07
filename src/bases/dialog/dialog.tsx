@@ -3,12 +3,13 @@ import { DialogButton, DialogButtonProps } from "./action";
 import { Mask } from "../mask";
 import { useSpring, animated } from "@react-spring/web";
 
-interface DialogProps {
+export interface DialogProps {
   visible: boolean;
   title?: string;
   content?: ReactNode;
   buttons?: DialogButtonProps[];
   closeOnACtion?: boolean;
+  unMount?: ()=>void;
   onMaskClick?: () => void;
   onClose?: () => void;
   onButton?: (buttonProp: DialogButtonProps, index: number) => void | Promise<void>;
@@ -20,6 +21,7 @@ export function Dialog({
   content,
   buttons,
   onMaskClick,
+  unMount,
   closeOnACtion = true,
   onClose,
   onButton,
@@ -90,6 +92,7 @@ export function Dialog({
                         ]);
                         if (closeOnACtion)
                           onClose?.()
+                          unMount?.()
                       }}
                     ></DialogButton>
                   </div>

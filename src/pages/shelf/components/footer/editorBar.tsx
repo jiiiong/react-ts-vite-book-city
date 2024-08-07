@@ -1,4 +1,5 @@
 import { Dialog } from "@/bases/dialog/dialog";
+import { Dialog as DialogMethod } from "@/bases/dialog";
 import { Toast } from "@/bases/toast";
 import { Popup } from "@/bases/popup";
 import { useReadLocalStorage } from "@/hooks/useReadLocalStorage";
@@ -36,6 +37,20 @@ export function EditorBar({
     setDialog(true);
   }
 
+  function handleConfirm(onConfirm: ()=>void) {
+    DialogMethod.show({
+      visible: true,
+      title: '是否确认删除',
+      buttons: [
+        { key: "cancel", text: "取消"},
+        { key: "confirm", text: "确认", type: 'error',
+          onClick: onConfirm
+        },
+      ],
+    })
+  }
+
+
   return (
     <>
       {/** 分组至 / 删除 */}
@@ -51,13 +66,13 @@ export function EditorBar({
         >
           <div
             className={`py-ygm-m ${!selecedCount && "text-ygm-weak"}`}
-            onClick={()=>setGroupPopup(true)}
+            onClick={()=>{if (selecedCount !== 0) setGroupPopup(true)}}
           >
             分组至
           </div>
           <div
             className={`py-ygm-m ${!selecedCount && "text-ygm-weak"}`}
-            onClick={onDelete}
+            onClick={()=>handleConfirm(onDelete)}
           >
             删除 ({selecedCount})
           </div>
