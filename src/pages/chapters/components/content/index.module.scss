@@ -1,0 +1,10 @@
+.button {
+  padding: var(--ygm-padding-s);
+  border-radius: var(--ygm-radius-s);
+  background-color: var(--ygm-color-border);
+
+  &.disabled {
+    cursor: none;
+    opacity: 0.4;
+  }
+}

@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import cx from "classnames";
 import { Mask } from "../mask";
 export interface PopupProps {
-  position?: 'left' | 'bottom';
+  position?: 'left' | 'bottom' | 'top';
   visible: boolean;
   mask?: boolean;
   children: ReactNode;
@@ -47,6 +47,7 @@ export function Popup({
           {
           "h-screen top-[0] left-[0]": position === "left",
           "w-screen bottom-[0] left-[0]": position === "bottom",
+          "w-screen top-[0] left-[0]" : position === 'top',
         })}
         style={{
           transform: percent.to((v) => {
@@ -54,9 +55,12 @@ export function Popup({
             if (position === 'left')
               return `translate(-${v}%,0)`;
             // bottom
-            else (position === 'bottom')
+            else if(position === 'bottom')
               return `translateY(${v}%)`;
-
+            // top
+            else {
+              return `translateY(-${v}%)`;
+            }
           }),
         }}
       >
