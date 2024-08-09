@@ -3,6 +3,7 @@ import { useTheme, useThemeDispatch } from "../../context/ThemeContext";
 import { ChapterCatalog } from "./components/catalog";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { ChapterProgress } from "./components/progress";
 
 interface ChapterFooterProps {
   visible: boolean;
@@ -13,6 +14,7 @@ export function ChapterFooter({
 }:ChapterFooterProps) {
   const {nightMode} = useTheme();
   const [catalogPopup, setCatalogPopup] = useState(false);
+  const [progressPopup, setProgressPopup] = useState(false);
   const themeDispatch = useThemeDispatch();
 
   const bookId = useParams().bookId;
@@ -26,6 +28,11 @@ export function ChapterFooter({
     setCatalogPopup(!catalogPopup);
   }
 
+  // 我需要根据 props 更新一部分的 state；
+  if (!visible && progressPopup){
+    setProgressPopup(false);
+  }
+
   return (
     <div>
       <Popup visible={visible} mask={false} position="bottom">
@@ -36,7 +43,9 @@ export function ChapterFooter({
             <i className="icon-menu text-ygm-weak text-ygm-xxl" />
             <span className="text-ygm-s">目录</span>
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center"
+            onClick={()=>setProgressPopup(true)}
+          >
             <i className="icon-tab text-ygm-weak text-ygm-xxl" />
             <span className="text-ygm-s">进度</span>
           </div>
@@ -62,6 +71,7 @@ export function ChapterFooter({
           handleCatalogSwitch();
         }}
       />
+      <ChapterProgress visible={progressPopup} />
     </div>
   );
 }
