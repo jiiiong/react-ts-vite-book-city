@@ -7,7 +7,8 @@ interface Theme {
   nightMode: boolean,
 }
 
-type Actions = object;
+type Actions =
+  {type: 'flipNightMode'};
 
 const initalTheme: Theme = {
   bgColor: BG_COLORS[DEFAULT_BG_COLOR_INDEX],
@@ -33,11 +34,26 @@ export function useTheme() {
 }
 
 export function useThemeDispatch() {
-  return useContext(themeDispatchContext);
+  const dispatch = useContext(themeDispatchContext);
+
+  if (!dispatch)
+    throw 'ThemeContext Dispatch is null';
+
+  return dispatch
 }
 
-function themeReducer(theme: Theme, action: Actions) {
-  return theme
+function themeReducer(theme: Theme, action: Actions): Theme {
+  switch(action.type) {
+    case 'flipNightMode': {
+      return {
+        ...theme,
+        nightMode: !theme.nightMode,
+      }
+    }
+    default: {
+      return theme
+    }
+  }
 }
 
 
