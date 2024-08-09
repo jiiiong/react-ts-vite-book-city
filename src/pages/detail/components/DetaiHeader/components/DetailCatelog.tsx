@@ -6,7 +6,7 @@ import { api } from "@/pages/detail/api";
 import { IBookInfo } from "@/types/book";
 import { px2rem } from "@/utils/unit";
 import { useMemo, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export function DetailCatelog() {
 
@@ -14,7 +14,7 @@ export function DetailCatelog() {
   const {data} = useRequest<IBookInfo>({url: api.getBook(bookId)})
   const [popup, setPopup] = useState(false);
   const latestThree = useMemo(()=>data?.chapters?.slice(-3).reverse(), [data?.chapters]);
-
+  const navigate = useNavigate()
   return (
     <>
       <div className="mb-ygm-l flex justify-between items-center text-ygm-m">
@@ -47,6 +47,7 @@ export function DetailCatelog() {
             title={data!.title}
             author={data!.author}
             bookId={data!.bookId}
+            onClickChapter={(index) => navigate(`/book/${bookId}/${index+1}`)}
           />
         </Popup>
       </div>

@@ -1,7 +1,6 @@
 import { Space } from "@/bases";
 import BookCover from "../book-cover";
 import { px2rem } from "@/utils/unit";
-import { useNavigate } from "react-router-dom";
 
 export interface BookCatelogListProps {
   catelogList: string[];
@@ -9,6 +8,7 @@ export interface BookCatelogListProps {
   title: string;
   author: string;
   bookId: string;
+  onClickChapter?: (index: number)=>void;
 }
 
 export function BookCatelogList(
@@ -17,10 +17,9 @@ export function BookCatelogList(
     imgUrl,
     title,
     author,
-    bookId,
+    onClickChapter,
   }: BookCatelogListProps
 ) {
-  const navigate = useNavigate()
   return (
    // box
    <div
@@ -57,7 +56,7 @@ export function BookCatelogList(
               text-ygm-m
               line-clamp-1
             "
-            onClick={()=>(navigate(`/book/${bookId}/${index + 1}`))}
+            onClick={()=>onClickChapter?.(index)}
           >
             {item}
           </div>
