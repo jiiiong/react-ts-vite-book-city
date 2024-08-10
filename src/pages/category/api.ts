@@ -1,5 +1,7 @@
+import { apiOrigin } from "@/utils/serverMap"
+
 const api = {
-  category: '/api/v1/category',
+  category: `${apiOrigin}/v1/category`,
 }
 
 export default api

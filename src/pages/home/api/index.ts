@@ -1,5 +1,7 @@
+import { apiOrigin } from "@/utils/serverMap";
+
 const api = {
-    getHomeData: '/api/v1/home',
+    getHomeData: `${apiOrigin}/v1/home`,
 }
 
 export default api;

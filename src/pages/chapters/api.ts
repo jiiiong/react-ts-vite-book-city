@@ -1,9 +1,10 @@
+import { apiOrigin } from "@/utils/serverMap";
 
 export const api = {
   getChapter: (bookId: string, chapterId: string) => (
-    `/api/v1/chapter/${bookId}/${chapterId}`
+    `${apiOrigin}/v1/chapter/${bookId}/${chapterId}`
   ),
   getBook: (id: string) => (
-    `/api/v1/book/${id}`
+    `${apiOrigin}/v1/book/${id}`
   )
 }

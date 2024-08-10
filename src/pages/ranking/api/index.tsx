@@ -1,6 +1,8 @@
+import { apiOrigin } from "@/utils/serverMap";
+
 export const api = {
-  ranking: '/api/v1/ranking/gender',
+  ranking: `${apiOrigin}/v1/ranking/gender`,
   getBookList: (gender: 'male'|'female', id: string) => (
-    `/api/v1/ranking/${gender}/bookList/${id}`
+    `${apiOrigin}/v1/ranking/${gender}/bookList/${id}`
   )
 }
