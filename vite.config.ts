@@ -7,6 +7,8 @@ console.log('here')
 export default defineConfig({
   plugins: [react()],
 
+  base: '/react-ts-vite-book-city',
+
   // 路径别名
   resolve: {
     alias: {
