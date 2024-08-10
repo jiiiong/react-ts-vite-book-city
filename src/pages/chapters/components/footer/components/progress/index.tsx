@@ -1,9 +1,10 @@
 import { Popup } from "@/bases/popup";
+import { Slider, SliderRef } from "@/bases/slider/slider";
 import { useRequest } from "@/hooks/useRequest";
 import { api } from "@/pages/chapters/api";
 import { IBookInfo } from "@/types/book";
 import cx from 'classnames';
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 interface ChapterProgressProps {
@@ -20,6 +21,12 @@ export function ChapterProgress({
   const isLast = Number(chapterId) === data?.chapters?.length;
 
   const [progIndex, setProgIndex] = useState(Number(chapterId));
+  const sliderRef = useRef<SliderRef>(null)
+
+  useEffect(()=>{
+    sliderRef.current?.setValue(Number(chapterId));
+  }, [chapterId])
+
   return (
     <Popup visible={visible} mask={false} position="bottom">
       <div className="pt-ygm-s bg-ygm-background text-ygm-m">
@@ -38,14 +45,25 @@ export function ChapterProgress({
             onClick={() => {
               if (!isFirst) {
                 setProgIndex(progIndex - 1);
-                navigate(`/book/${bookId}/${progIndex - 1}`, {replace: true});
+                navigate(`/book/${bookId}/${progIndex - 1}`, { replace: true });
               }
             }}
           >
             上一章
           </div>
           {/** slider */}
-          <div className="px-ygm-xl">slider</div>
+          <div className="flex-1 px-ygm-xl">
+            <Slider
+              ref={sliderRef}
+              initValue={Number(chapterId)}
+              min={1}
+              max={data?.chapters?.length}
+              onChange={(finalIndex) => setProgIndex(finalIndex)}
+              onAfterChange={(value) => {
+                navigate(`/book/${bookId}/${value}`, { replace: true });
+              }}
+            />
+          </div>
           {/** next */}
           <div
             className={cx("min-w-[37px]", { "text-ygm-weak": isLast })}
