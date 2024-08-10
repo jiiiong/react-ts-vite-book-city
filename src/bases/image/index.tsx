@@ -1,5 +1,6 @@
 import React, { CSSProperties, useRef } from "react";
 import useItersectionObserver from "@/hooks/useIntersectionObserver";
+import { publicOrigin } from "@/utils/serverMap";
 
 export interface ImageProps {
   src: string;
@@ -34,9 +35,11 @@ function Image({
 }: ImageProps) {
   const imgRef = useRef<HTMLImageElement | null>(null);
   const {entry:observerEntry} = useItersectionObserver(imgRef, {freezeOnceVisible: true});
+  const regex = new RegExp(`.*?public`, 'i');
+  const source = (process.env.NODE_ENV === 'development') ? src : src.replace(regex, publicOrigin);
   return (
     <img
-      src={observerEntry?.isIntersecting || !lazy ? src : loading}
+      src={observerEntry?.isIntersecting || !lazy ? source : loading}
       alt={alt}
       // width={width}
       // height={height}
