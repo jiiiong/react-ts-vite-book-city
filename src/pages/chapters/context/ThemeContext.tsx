@@ -8,7 +8,9 @@ interface Theme {
 }
 
 type Actions =
-  {type: 'flipNightMode'};
+  {type: 'setNightTheme', nightTheme: boolean} |
+  {type: 'setFontSize', fontSize: number} |
+  {type: 'setBgColor', bgColor: string};
 
 const initalTheme: Theme = {
   bgColor: BG_COLORS[DEFAULT_BG_COLOR_INDEX],
@@ -44,12 +46,27 @@ export function useThemeDispatch() {
 
 function themeReducer(theme: Theme, action: Actions): Theme {
   switch(action.type) {
-    case 'flipNightMode': {
+    case 'setNightTheme': {
       return {
         ...theme,
-        nightMode: !theme.nightMode,
+        nightMode: action.nightTheme,
       }
     }
+
+    case 'setFontSize' : {
+      return {
+        ...theme,
+        fontSize: action.fontSize
+      }
+    }
+
+    case 'setBgColor': {
+      return {
+        ...theme,
+        bgColor: action.bgColor
+      }
+    }
+
     default: {
       return theme
     }

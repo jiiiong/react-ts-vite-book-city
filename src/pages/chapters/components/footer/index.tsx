@@ -4,6 +4,7 @@ import { ChapterCatalog } from "./components/catalog";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChapterProgress } from "./components/progress";
+import { ChapterSetting } from "./components/setting";
 
 interface ChapterFooterProps {
   visible: boolean;
@@ -15,13 +16,16 @@ export function ChapterFooter({
   const {nightMode} = useTheme();
   const [catalogPopup, setCatalogPopup] = useState(false);
   const [progressPopup, setProgressPopup] = useState(false);
+  const [settingPopup, setSettingPopup] = useState(false);
+
   const themeDispatch = useThemeDispatch();
+  const theme = useTheme();
 
   const bookId = useParams().bookId;
   const navigate = useNavigate()
 
   function handleNightModeSwitch() {
-    themeDispatch({type: 'flipNightMode'});
+    themeDispatch({type: 'setNightTheme', nightTheme: !theme.nightMode});
   }
 
   function handleCatalogSwitch() {
@@ -29,8 +33,9 @@ export function ChapterFooter({
   }
 
   // 我需要根据 props 更新一部分的 state；
-  if (!visible && progressPopup){
+  if (!visible && (progressPopup || settingPopup)){
     setProgressPopup(false);
+    setSettingPopup(false);
   }
 
   return (
@@ -49,7 +54,9 @@ export function ChapterFooter({
             <i className="icon-tab text-ygm-weak text-ygm-xxl" />
             <span className="text-ygm-s">进度</span>
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center"
+            onClick={()=>setSettingPopup(true)}
+          >
             <i className="icon-cog text-ygm-weak text-ygm-xxl" />
             <span className="text-ygm-s">设置</span>
           </div>
@@ -72,6 +79,7 @@ export function ChapterFooter({
         }}
       />
       <ChapterProgress visible={progressPopup} />
+      <ChapterSetting visible={settingPopup}/>
     </div>
   );
 }

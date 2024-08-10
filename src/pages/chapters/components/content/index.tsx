@@ -21,7 +21,7 @@ export function ChapterContent({
     url: api.getChapter(bookId as string, chapterId as string),
   });
 
-  const {bgColor, fontSize} = useTheme();
+  const theme = useTheme();
 
   const isFirst = Number(chapterId) === 1;
   const isLast = Number(chapterId) === bookData?.chapters?.length;
@@ -34,13 +34,16 @@ export function ChapterContent({
   if (!chapterData!.length)
     return <ErrorBlock />
 
+  const bgColor = theme.nightMode ? '#1a1a1a' : theme.bgColor;
+  const fontColor = theme.nightMode ? '#9e9e9e' : 'inherit';
+
   return (
     // content box
     <div
       className={`
         h-screen w-full p-ygm-l overflow-hidden overflow-y-auto
       `}
-      style={{fontSize: fontSize, backgroundColor: bgColor}}
+      style={{fontSize: theme.fontSize, backgroundColor: bgColor, color: fontColor}}
       onClick={onContentClick}
     >
 

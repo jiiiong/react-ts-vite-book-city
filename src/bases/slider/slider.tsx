@@ -57,7 +57,7 @@ export const Slider = forwardRef<SliderRef, SliderProps>(({
     const width = rect.width;
     const startX = rect.left;
     const deltaX = e.clientX - startX;
-    const position = getRegularedValue((deltaX / width)*(max-min+1));
+    const position = getRegularedValue((deltaX / width)*(max-min+1) + min);
     setValue(position);
     onChange?.(position);
     onAfterChange?.(position);
