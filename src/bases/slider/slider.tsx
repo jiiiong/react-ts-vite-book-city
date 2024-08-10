@@ -63,6 +63,31 @@ export const Slider = forwardRef<SliderRef, SliderProps>(({
     onAfterChange?.(position);
   }
 
+  const isDragging = useRef(false);
+
+  function handleMouseDown(e: React.MouseEvent) {
+    startXRef.current = e.clientX;
+    startPosRef.current = value;
+    isDragging.current = true
+  }
+
+  function handleMouseMove(e: React.MouseEvent) {
+    if (isDragging.current){
+      const deltaX = e.clientX - startXRef.current;
+      const total = trackRef.current!.offsetWidth;
+      let curVal = (deltaX / total) * (max - min + 1);
+      curVal += startPosRef.current;
+      curVal = getRegularedValue(curVal);
+      setValue(curVal);
+      onChange?.(curVal);
+    }
+  }
+
+  function handleMouseUp() {
+    onAfterChange?.(value);
+    isDragging.current = false;
+  }
+
   function handleTouchStart(e: React.TouchEvent) {
     startXRef.current = e.touches[0].clientX;
     startPosRef.current = value;
@@ -106,11 +131,16 @@ export const Slider = forwardRef<SliderRef, SliderProps>(({
         w-[24px] h-[24px]
         bg-ygm-background rounded-[50%] shadow-[0_1px_2px_rgba(0,0,0,0.5)]
         absolute top-1/2 -translate-y-1/2 -translate-x-1/2
+        cursor-grab
       "
         style={{left: `${position}%`}}
         onTouchStart={disabled ? undefined : handleTouchStart}
         onTouchMove={disabled ? undefined : handleTouchMove}
         onTouchEnd={disabled ? undefined : handleTouchEnd}
+        onMouseDown={disabled ? undefined : handleMouseDown}
+        onMouseMove={disabled ? undefined : handleMouseMove}
+        onMouseUp={disabled ? undefined : handleMouseUp}
+        onClick={(e)=>(e.stopPropagation())}
       >
       </div>
     </div>
