@@ -35,6 +35,8 @@ export const Slider = forwardRef<SliderRef, SliderProps>(({
   }
 
   const [value, setValue] = useState(getRegularedValue(initValue));
+  const valueRef = useRef(0);
+  valueRef.current = value;
 
   useImperativeHandle(ref, ()=>(
     {
@@ -68,7 +70,6 @@ export const Slider = forwardRef<SliderRef, SliderProps>(({
   function handleMouseMove(e: MouseEvent) {
     if (isDragging.current){
       const deltaX = e.clientX - startXRef.current;
-      console.log(deltaX)
       const total = trackRef.current!.offsetWidth;
       let curVal = (deltaX / total) * (max - min + 1);
       curVal += startPosRef.current;
@@ -79,6 +80,8 @@ export const Slider = forwardRef<SliderRef, SliderProps>(({
   }
 
   function handleMouseUp() {
+    const value = valueRef.current;
+    console.log('upup', value)
     onAfterChange?.(value);
     isDragging.current = false;
     document.removeEventListener('mousemove', handleMouseMove);
