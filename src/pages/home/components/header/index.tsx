@@ -6,7 +6,9 @@ const Header: React.FC = () => {
     return (
         <div className={styles.header}>
             <div className={styles.left}>
-                <h1>书城</h1>
+                <span>书城</span>
+                {'  '}
+                <span className='text-ygm-s'>by:张天炯</span>
             </div>
             <div className={styles.right}>
                 <Link to="/search">
