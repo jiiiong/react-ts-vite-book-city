@@ -77,8 +77,8 @@ function Swiper({
       ratioedDiff = diff / trackRef.current.offsetWidth;
     }
     setCurrentIndex(Math.round(calcIndex(currentIndex + ratioedDiff)) % childCount);
-    trackRef.current!.removeEventListener("mousemove", handleMouseMove as EventListener);
-    trackRef.current!.removeEventListener("mouseup", handleMouseUp as EventListener);
+    document.removeEventListener("mousemove", handleMouseMove as EventListener);
+    document.removeEventListener("mouseup", handleMouseUp as EventListener);
     setDragging(false);
   }
 
@@ -94,8 +94,8 @@ function Swiper({
   function handleMouseDown(e: React.MouseEvent<HTMLDivElement>) {
     startXRef.current = e.clientX;
     autoPlayRef.current = false;
-    trackRef.current!.addEventListener("mousemove", handleMouseMove);
-    trackRef.current!.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
     setDragging(true);
   }
 
