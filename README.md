@@ -4,12 +4,12 @@
 
 ## 技术栈
 
-编程语言：TypeScript
-构建系统：Vite
-前端框架：React
-CSS 工具：PostCSS、Tailwind、SCSS
-规范化工具：ESLint、Prettier、EditorConfig
-兼容性工具：browserslist
+- 编程语言：TypeScript
+- 构建系统：Vite
+- 前端框架：React
+- CSS 工具：PostCSS、Tailwind、SCSS
+- 规范化工具：ESLint、Prettier、EditorConfig
+- 兼容性工具：browserslist
 
 ## 项目完成内容
 
